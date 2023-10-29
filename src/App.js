@@ -24,7 +24,14 @@ function App() {
           <input type="text" className='rounded-md bg-slate-500 px-1' value={inputTodo} onChange={handleOnChange} />
           <button className='rounded-md bg-slate-900 px-1' onClick={handleAdd} >Add</button>
         </div>
-        <Todo />
+        <div className='flex flex-col rounded-md bg-slate-500 p-3 gap-2'>
+          {
+            toDoList.map((toDoElement)=>{
+              return <Todo todoText={toDoElement} />
+              // console.log(toDoElement)
+            })
+          }
+        </div>
       </div>
 
     </div>
