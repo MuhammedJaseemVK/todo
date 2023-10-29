@@ -12,8 +12,18 @@ function App() {
   }
 
   const handleAdd = () => {
+    if (!inputTodo) {
+      return
+    }
     setToDoList([...toDoList, inputTodo]);
     setInputTodo('');
+  }
+
+  const handleDelete = (index) => {
+    let newList = toDoList.filter((toDo, i) => {
+      return index !== i
+    });
+    setToDoList(newList);
   }
 
   return (
@@ -22,16 +32,16 @@ function App() {
         <div>
           <h1>ToDo App</h1>
           <input type="text" className='rounded-md bg-slate-500 px-1' value={inputTodo} onChange={handleOnChange} />
-          <button className='rounded-md bg-slate-900 px-1' onClick={handleAdd} >Add</button>
+          <button className='rounded-md bg-yellow-500 px-1' onClick={handleAdd} >Add</button>
         </div>
-        <div className='flex flex-col rounded-md bg-slate-500 p-3 gap-2'>
+        {toDoList.length > 0 ? (<div className='flex flex-col rounded-md bg-slate-500 p-3 gap-2'>
           {
-            toDoList.map((toDoElement)=>{
-              return <Todo todoText={toDoElement} />
-              // console.log(toDoElement)
+            toDoList.map((toDoElement, index) => {
+              return <Todo key={index} todoText={toDoElement} handleDelete={() => handleDelete(index)} />
             })
           }
-        </div>
+        </div>)
+          :null}
       </div>
 
     </div>
