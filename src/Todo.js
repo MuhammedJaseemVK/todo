@@ -5,8 +5,8 @@ function Todo(props) {
 
     return (
         <div className='flex justify-between items-center rounded bg-yellow-500 px-2 py-1  w-full'>
-            <input type="checkbox" />
-            {props.todoText}
+            <input type="checkbox" onClick={props.handleStatus} />
+            {props.todoText.task}
             <FaRegTrashAlt onClick={props.handleDelete} />
         </div>
     )
