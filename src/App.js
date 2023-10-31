@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import Todo from './Todo';
 
 
@@ -17,26 +17,36 @@ function App() {
     if (!inputTodo) {
       return
     }
-    setToDoList([...toDoList, { task: inputTodo, status: false }]);
+    const newList = [...toDoList, { task: inputTodo, status: false }];
+    localStorage.setItem('todos',JSON.stringify(newList));
+    setToDoList(newList);
     setInputTodo('');
   }
 
   const handleDelete = (index) => {
-    let newList = toDoList.filter((toDo, i) => {
+    const newList = toDoList.filter((toDo, i) => {
       return index !== i
     });
+    localStorage.setItem('todos',JSON.stringify(newList));
     setToDoList(newList);
   }
 
   const handleStatus = (index) => {
-    let newList = toDoList.map((toDo, i) => {
+    const newList = toDoList.map((toDo, i) => {
       if (i === index) {
         return { ...toDo, status: !toDo.status }
       }
       return toDo;
     });
+    localStorage.setItem('todos',JSON.stringify(newList));
     setToDoList(newList);
   }
+
+  useEffect(() => {
+    if(localStorage.getItem('todos')){
+      setToDoList(JSON.parse(localStorage.getItem('todos')))
+    }
+  }, [])
 
   useEffect(() => {
     const completeToDos = toDoList.filter((toDoElement) => {
@@ -50,6 +60,7 @@ function App() {
     setDoneToDos(completeToDos.length);
     setActiveToDos(notCompleteToDos.length);
   }, [toDoList])
+  
 
 
 
@@ -66,7 +77,7 @@ function App() {
           {doneToDos} done {activeToDos} to go
           {
             toDoList.map((toDoElement, index) => {
-              return <Todo key={index} todoText={toDoElement} handleDelete={() => handleDelete(index)} handleStatus={() => handleStatus(index)} />
+              return <Todo key={index} todoItem={toDoElement} handleDelete={() => handleDelete(index)} handleStatus={() => handleStatus(index)} />
             })
           }
         </div>)

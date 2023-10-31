@@ -4,9 +4,9 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 function Todo(props) {
 
     return (
-        <div className='flex justify-between items-center rounded bg-yellow-500 px-2 py-1  w-full'>
-            <input type="checkbox" onClick={props.handleStatus} />
-            {props.todoText.task}
+        <div className={`${props.todoItem.status?'line-through ':''} flex justify-between items-center rounded bg-yellow-500 px-2 py-1  w-full`}>
+            <input type="checkbox" checked={props.todoItem.status} onClick={props.handleStatus} />
+            {props.todoItem.task}
             <FaRegTrashAlt onClick={props.handleDelete} />
         </div>
     )
