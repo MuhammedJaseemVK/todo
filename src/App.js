@@ -23,6 +23,12 @@ function App() {
     setInputTodo('');
   }
 
+  const handleKeyDown = (event) =>{
+    if(event.key==='Enter'){
+      handleAdd();
+    }
+  }
+
   const handleDelete = (index) => {
     const newList = toDoList.filter((toDo, i) => {
       return index !== i
@@ -67,11 +73,11 @@ function App() {
 
   return (
     <div className='flex justify-center items-center w-screen h-screen text-white bg-slate-900'>
-      <div className="flex flex-col bg-slate-800 gap-3 p-5 rounded-md text-center h-3/4">
+      <div className="flex flex-col bg-slate-800 gap-3 p-5 rounded-md text-center h-1/2">
         <div className='flex flex-col gap-2'>
           <h1 className='font-bold'>ToDo App</h1>
           <div className="flex flex-row">
-            <input type="text" className='rounded-l-md bg-slate-500 px-3' name="todo" value={inputTodo} onChange={handleOnChange} />
+            <input type="text" className='rounded-l-md bg-slate-500 px-3' name="todo" value={inputTodo} onChange={handleOnChange} onKeyDown={handleKeyDown} />
             <button className='rounded-r-md bg-yellow-500 px-3 py-1' name="addButoon" onClick={handleAdd} >Add</button>
           </div>
         </div>
@@ -85,7 +91,10 @@ function App() {
             }
           </>
           )
-            : null}
+            : <div className='flex flex-col justify-center items-center h-full'>
+              <img className="w-20" src="lemonade-chill.jpg" alt="" />
+              <p className='font-bold'>Just chill</p>
+            </div>}
         </div>
       </div>
 
