@@ -47,6 +47,12 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(newList));
     setToDoList(newList);
   }
+  const handleEdit = (index, newText) => {
+    const updatedList = [...toDoList];
+    updatedList[index].task = newText;
+    localStorage.setItem('todos', JSON.stringify(updatedList));
+    setToDoList(updatedList);
+  };
 
   useEffect(() => {
     if (localStorage.getItem('todos')) {
@@ -86,7 +92,7 @@ function App() {
             {doneToDos} done {activeToDos} to go
             {
               toDoList.map((toDoElement, index) => {
-                return <Todo key={index} todoItem={toDoElement} handleDelete={() => handleDelete(index)} handleStatus={() => handleStatus(index)} />
+                return <Todo key={index} todoItem={toDoElement} handleDelete={() => handleDelete(index)} handleStatus={() => handleStatus(index)} handleEdit={(newText)=>handleEdit(index,newText)} />
               })
             }
           </>
