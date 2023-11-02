@@ -1,6 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import Todo from './Todo';
+import Todo from './components/Todo';
+import Modal from './components/Modal';
 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
   const [toDoList, setToDoList] = useState([]);
   const [activeToDos, setActiveToDos] = useState(0);
   const [doneToDos, setDoneToDos] = useState(0);
+  const [isConfirm, setIsConfirm] = useState(false);
 
   const handleOnChange = (event) => {
     setInputTodo(event.target.value);
@@ -56,9 +58,13 @@ function App() {
   };
 
   const handleDeleteAll = () => {
+    handleIsConfirm();
     const updatedList = [];
     localStorage.setItem('todos', updatedList);
     setToDoList(updatedList)
+  }
+  const handleIsConfirm =()=>{
+    setIsConfirm(!isConfirm);
   }
 
   useEffect(() => {
@@ -87,7 +93,7 @@ function App() {
           <h1 className='font-bold'>ToDo App</h1>
           <div className="flex flex-row">
             <input type="text" className='rounded-l-md bg-slate-500 px-3' name="todo" value={inputTodo} onChange={handleOnChange} onKeyDown={handleKeyDown} />
-            <button className='rounded-r-md bg-yellow-500 px-3 py-1' name="addButoon" onClick={handleAdd} >Add</button>
+            <button className='rounded-r-md bg-red-500 px-3 py-1' name="addButoon" onClick={handleAdd} >Add</button>
           </div>
         </div>
         <div className='flex flex-col rounded-md  bg-slate-500 p-3 gap-2 h-full overflow-auto'>
@@ -108,8 +114,11 @@ function App() {
         </div>
         {
           toDoList.length > 0 ? (<div className="flex justify-center">
-            <button className='bg-yellow-500 rounded-md px-1 w-1/4' onClick={handleDeleteAll}>Delete All</button>
+            <button className='bg-red-500 rounded-md px-2' onClick={handleIsConfirm}>Delete All</button>
           </div>) : (null)
+        }
+        {
+          isConfirm ? (<Modal handleIsConfirm={handleIsConfirm} handleDeleteAll={handleDeleteAll} />) : (null)
         }
       </div>
 
