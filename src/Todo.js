@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { FaRegTrashAlt, FaEdit } from 'react-icons/fa'
+import { FaRegTrashAlt, FaEdit, FaRegSave } from 'react-icons/fa'
 
 function Todo(props) {
     const [isEditing, setIsEditing] = useState(false);
@@ -21,15 +21,17 @@ function Todo(props) {
     return (
         <div className={`${props.todoItem.status ? 'line-through ' : ''} flex justify-between items-center rounded bg-yellow-500 px-2 py-1  w-full`}>
             <input type="checkbox" checked={props.todoItem.status} name="checkbox" onChange={props.handleStatus} />
-            {/* {props.todoItem.task} */}
             {
                 isEditing ? (
-                    <input type="text" className='rounded-md bg-slate-500 w-1/2' value={editedText} onChange={handleChange} onKeyDown={handleKeyDown} name="editTodo" />
+                    <input type="text" className='rounded-md bg-slate-500 w-[200px]' value={editedText} onChange={handleChange} onKeyDown={handleKeyDown} name="editTodo" />
                 ) : (props.todoItem.task)
             }
             <div className="flex gap-2">
-            <FaEdit onClick={handleEdit} />
-            <FaRegTrashAlt onClick={props.handleDelete} />
+                {
+                    isEditing ? (<FaRegSave onClick={handleEdit} />) :
+                        (<FaEdit onClick={handleEdit} />)
+                }
+                <FaRegTrashAlt onClick={props.handleDelete} />
             </div>
         </div>
     )
