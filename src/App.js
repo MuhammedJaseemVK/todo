@@ -23,8 +23,8 @@ function App() {
     setInputTodo('');
   }
 
-  const handleKeyDown = (event) =>{
-    if(event.key==='Enter'){
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
       handleAdd();
     }
   }
@@ -47,12 +47,19 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(newList));
     setToDoList(newList);
   }
+
   const handleEdit = (index, newText) => {
     const updatedList = [...toDoList];
     updatedList[index].task = newText;
     localStorage.setItem('todos', JSON.stringify(updatedList));
     setToDoList(updatedList);
   };
+
+  const handleDeleteAll = () => {
+    const updatedList = [];
+    localStorage.setItem('todos', updatedList);
+    setToDoList(updatedList)
+  }
 
   useEffect(() => {
     if (localStorage.getItem('todos')) {
@@ -73,10 +80,6 @@ function App() {
     setActiveToDos(notCompleteToDos.length);
   }, [toDoList])
 
-
-
-
-
   return (
     <div className='flex justify-center items-center w-screen h-screen text-white bg-slate-900'>
       <div className="flex flex-col bg-slate-800 gap-3 p-5 rounded-md text-center h-1/2">
@@ -87,14 +90,15 @@ function App() {
             <button className='rounded-r-md bg-yellow-500 px-3 py-1' name="addButoon" onClick={handleAdd} >Add</button>
           </div>
         </div>
-        <div className='flex flex-col rounded-md bg-slate-500 p-3 gap-2 h-full overflow-auto'>
+        <div className='flex flex-col rounded-md  bg-slate-500 p-3 gap-2 h-full overflow-auto'>
           {toDoList.length > 0 ? (<>
             {doneToDos} done {activeToDos} to go
             {
               toDoList.map((toDoElement, index) => {
-                return <Todo key={index} todoItem={toDoElement} handleDelete={() => handleDelete(index)} handleStatus={() => handleStatus(index)} handleEdit={(newText)=>handleEdit(index,newText)} />
+                return <Todo key={index} todoItem={toDoElement} handleDelete={() => handleDelete(index)} handleStatus={() => handleStatus(index)} handleEdit={(newText) => handleEdit(index, newText)} />
               })
             }
+
           </>
           )
             : <div className='flex flex-col justify-center items-center h-full'>
@@ -102,6 +106,11 @@ function App() {
               <p className='font-bold'>Just chill</p>
             </div>}
         </div>
+        {
+          toDoList.length > 0 ? (<div className="flex justify-center">
+            <button className='bg-yellow-500 rounded-md px-1 w-1/4' onClick={handleDeleteAll}>Delete All</button>
+          </div>) : (null)
+        }
       </div>
 
     </div>
