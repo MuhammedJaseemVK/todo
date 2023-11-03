@@ -102,7 +102,8 @@ function App() {
         </div>
         <div className='flex flex-col rounded-md  bg-slate-500 p-3 gap-2 h-full overflow-auto'>
           {toDoList.length > 0 ? (<>
-          {doneToDos} done {activeToDos} to go
+          {doneToDos===toDoList.length?(<p>Your work is done!</p>):(<p>{doneToDos} done {activeToDos} to go</p>)}
+          
             {
               toDoList.map((toDoElement, index) => {
                 return <Todo key={index} todoItem={toDoElement} handleDelete={() => handleDelete(index)} handleStatus={() => handleStatus(index)} handleEdit={(newText) => handleEdit(index, newText)} />
