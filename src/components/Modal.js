@@ -4,7 +4,7 @@ function Modal(props) {
     return (
         <div className={`fixed inset-0 flex justify-center items-center bg-black/80`} onClick={props.handleIsConfirm} >
             <div className="flex flex-col bg-slate-800 p-5 gap-1 items-center rounded-md">
-                <img className='h-10 w-10' src="caution.png" alt="" />
+                <img className='h-10' src="caution.png" alt="Caution" />
                 <h1 className='font-bold'>Are you sure?</h1>
                 <p>This action will delete all Todos</p>
                 <div className="flex gap-2 justify-center">

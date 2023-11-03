@@ -64,7 +64,7 @@ function App() {
     localStorage.setItem('todos', updatedList);
     setToDoList(updatedList)
   }
-  const handleIsConfirm =()=>{
+  const handleIsConfirm = () => {
     setIsConfirm(!isConfirm);
   }
 
@@ -88,10 +88,13 @@ function App() {
   }, [toDoList])
 
   return (
-    <div className='flex justify-center items-center w-screen h-screen text-white bg-slate-900'>
-      <div className="flex flex-col bg-slate-800 gap-3 p-5 rounded-md text-center h-1/2 mx-5 md:mx-0">
-        <div className='flex flex-col gap-2'>
-          <h1 className='font-bold'>ToDo App</h1>
+    <div className='flex justify-center items-center w-screen h-screen text-white bg-slate-900 font-poppins'>
+      <div className="flex flex-col bg-slate-800 gap-3 p-5 rounded-md text-center h-1/2 mx-5 md:mx-0 ">
+        <div className='flex flex-col gap-2 items-center'>
+          <div className="flex justify-center items-center gap-2">
+            <img className='w-10' src="logo512.png" alt="Logo" />
+            <h1 className='font-bold'>ToDo App</h1>
+          </div>
           <div className="flex flex-row">
             <input type="text" className='rounded-l-md bg-slate-500 px-3 w-full ' name="todo" value={inputTodo} onChange={handleOnChange} onKeyDown={handleKeyDown} />
             <button className='rounded-r-md bg-red-500 px-3 py-1 ' name="addButoon" onClick={handleAdd} >Add</button>
@@ -99,7 +102,7 @@ function App() {
         </div>
         <div className='flex flex-col rounded-md  bg-slate-500 p-3 gap-2 h-full overflow-auto'>
           {toDoList.length > 0 ? (<>
-            {doneToDos} done {activeToDos} to go
+          {doneToDos} done {activeToDos} to go
             {
               toDoList.map((toDoElement, index) => {
                 return <Todo key={index} todoItem={toDoElement} handleDelete={() => handleDelete(index)} handleStatus={() => handleStatus(index)} handleEdit={(newText) => handleEdit(index, newText)} />
@@ -109,7 +112,7 @@ function App() {
           </>
           )
             : <div className='flex flex-col justify-center items-center h-full'>
-              <About/>
+              <About />
             </div>}
         </div>
         {
