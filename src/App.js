@@ -89,7 +89,7 @@ function App() {
 
   return (
     <div className='flex justify-center items-center w-screen h-screen text-white bg-slate-900 font-poppins'>
-      <div className="flex flex-col bg-slate-800 gap-3 p-5 rounded-md text-center h-1/2 mx-5 md:mx-0 ">
+      <div className="flex flex-col bg-slate-800 gap-3 p-5 rounded-md text-center h-2/3 mx-5 md:mx-0 ">
         <div className='flex flex-col gap-2 items-center'>
           <div className="flex justify-center items-center gap-2">
             <img className='w-10' src="logo512.png" alt="Logo" />
