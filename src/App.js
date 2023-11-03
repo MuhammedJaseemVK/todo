@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import Todo from './components/Todo';
 import Modal from './components/Modal';
+import About from './components/About';
 
 
 function App() {
@@ -88,12 +89,12 @@ function App() {
 
   return (
     <div className='flex justify-center items-center w-screen h-screen text-white bg-slate-900'>
-      <div className="flex flex-col bg-slate-800 gap-3 p-5 rounded-md text-center h-1/2">
+      <div className="flex flex-col bg-slate-800 gap-3 p-5 rounded-md text-center h-1/2 mx-5 md:mx-0">
         <div className='flex flex-col gap-2'>
           <h1 className='font-bold'>ToDo App</h1>
           <div className="flex flex-row">
-            <input type="text" className='rounded-l-md bg-slate-500 px-3' name="todo" value={inputTodo} onChange={handleOnChange} onKeyDown={handleKeyDown} />
-            <button className='rounded-r-md bg-red-500 px-3 py-1' name="addButoon" onClick={handleAdd} >Add</button>
+            <input type="text" className='rounded-l-md bg-slate-500 px-3 w-full ' name="todo" value={inputTodo} onChange={handleOnChange} onKeyDown={handleKeyDown} />
+            <button className='rounded-r-md bg-red-500 px-3 py-1 ' name="addButoon" onClick={handleAdd} >Add</button>
           </div>
         </div>
         <div className='flex flex-col rounded-md  bg-slate-500 p-3 gap-2 h-full overflow-auto'>
@@ -108,8 +109,7 @@ function App() {
           </>
           )
             : <div className='flex flex-col justify-center items-center h-full'>
-              <img className="w-20" src="lemonade-chill.jpg" alt="" />
-              <p className='font-bold'>Just chill</p>
+              <About/>
             </div>}
         </div>
         {
